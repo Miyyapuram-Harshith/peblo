@@ -52,11 +52,11 @@ Peblo TV Mini separates **editorial content management** from the **published co
                     │ Browse · Search      │
                     │ Filters · Details    │
                     └──────────────────────┘
-````
+
 
 **Core boundary:** PostgreSQL stores editorial state; the Viewer consumes only the currently active published catalogue.
 
----
+
 
 ## Core Engineering Decisions
 
@@ -64,7 +64,6 @@ Peblo TV Mini separates **editorial content management** from the **published co
 
 Publishing is a controlled pipeline rather than a direct file overwrite:
 
-```text
 Validate
    ↓
 Select publishable content
@@ -80,7 +79,7 @@ SHA-256 hash
 Immutable artifact
    ↓
 Atomic activation
-```
+
 
 Catalogue artifacts are content-addressed using their SHA-256 hash. The active catalogue pointer changes only after the new artifact has been successfully generated and validated.
 
@@ -110,11 +109,10 @@ The validation engine returns stable rule IDs with editor-readable messages, inc
 
 Episodes sharing a `content_group` represent language variants of the same logical episode.
 
-```text
 Episode A — English ┐
                     ├── One catalogue episode
 Episode A — Hindi   ┘
-```
+
 
 The published catalogue contains one logical episode with a deterministic `languages` array.
 
@@ -124,11 +122,11 @@ Season `0` is treated as **Trailers** and excluded from the normal season experi
 
 Application logic depends on a storage interface rather than a vendor-specific implementation:
 
-```text
+
 StorageProvider
 ├── LocalStorageProvider
 └── R2StorageProvider
-```
+
 
 Local storage keeps development simple, while Cloudflare R2 provides the production object-storage implementation through its S3-compatible API.
 
@@ -168,7 +166,7 @@ The repository includes backend tests focused on high-risk validation and publis
 
 CI runs:
 
-```text
+
 Backend
 ├── pytest
 └── ruff
@@ -182,7 +180,7 @@ Viewer
 ├── lint
 ├── typecheck
 └── build
-```
+
 
 ---
 
