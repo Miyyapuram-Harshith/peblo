@@ -1,36 +1,248 @@
-# Peblo TV
 
-Peblo TV is a streaming platform CMS and Viewer built for production scale.
-It consists of a FastAPI backend (PostgreSQL + SQLAlchemy), a React CMS for managing content and publishing, and a React Viewer for end-users to consume published content.
+# Peblo TV Mini
 
-## Architecture & Setup
-- **PostgreSQL Database:** Fully relational, using Async SQLAlchemy 2.0. SQLite is restricted strictly to an in-memory testing override.
-- **Docker Compose:** Fully containerized setup. Start everything via `docker-compose up --build`.
+> A production-minded content operations and publishing platform for managing, validating, publishing, and serving a streaming catalogue.
 
-## Tradeoffs
-- A monolithic FastAPI backend was chosen over microservices to minimize deployment complexity and optimize data integrity.
-- Client-side data fetching uses `react-query` with a traditional REST API instead of GraphQL to leverage simple caching and predictable SQL querying.
+Peblo TV Mini separates **editorial content management** from the **published consumer catalogue**.
 
-## Immutable Publishing
-Content is published via atomic JSON artifacts. The backend computes a deterministic SHA-256 hash of the canonical JSON (collapsing language variants and grouping Season 0 as Trailers) and securely stores it as an immutable artifact in object storage. The active catalogue pointer is then atomically updated in the database to prevent partial state errors.
+### Stack
 
-## Storage
-Images and catalogues are managed through an abstraction layer. It supports a `Local` driver for dev, and a Cloudflare `R2` object storage driver (via boto3 S3 API) for production.
+- **CMS:** React + TypeScript
+- **API:** FastAPI + PostgreSQL + SQLAlchemy
+- **Viewer:** React + TypeScript
+- **Storage:** Local provider / Cloudflare R2
+- **Migrations:** Alembic
+- **CI:** GitHub Actions
+- **Runtime:** Docker Compose
 
-## Search
-The Viewer implements server-side searching through the `/api/catalogue/search` endpoint instead of downloading the catalogue locally, allowing for scalable DB-side querying and filtering.
+---
 
-## Testing & CI
-GitHub Actions is configured to run `pytest` for the backend, as well as `npm run lint`, `typecheck`, and `build` for both React frontends.
+## Architecture
+
+
+                    ┌──────────────────────┐
+                    │         CMS          │
+                    │  React + TypeScript  │
+                    └──────────┬───────────┘
+                               │ REST
+                               ▼
+                    ┌──────────────────────┐
+                    │       FastAPI        │
+                    │ Auth · RBAC · CRUD   │
+                    │ Validation · Search  │
+                    │ Publishing Pipeline  │
+                    └───────┬───────┬──────┘
+                            │         │
+                   ┌────────▼───┐   ┌▼──────────────┐
+                   │ PostgreSQL │   │ Object Storage│
+                   │ SQLAlchemy │   │ Local / R2    │
+                   └──────┬─────┘   └───────────────┘
+                          │
+                          ▼
+               ┌──────────────────────────┐
+               │   Immutable Catalogue    │
+               │ Canonical JSON + SHA-256 │
+               │    Atomic Activation     │
+               └────────────┬─────────────┘
+                            │
+                            ▼
+                    ┌──────────────────────┐
+                    │       Viewer         │
+                    │  React + TypeScript  │
+                    │ Browse · Search      │
+                    │ Filters · Details    │
+                    └──────────────────────┘
+````
+
+**Core boundary:** PostgreSQL stores editorial state; the Viewer consumes only the currently active published catalogue.
+
+---
+
+## Core Engineering Decisions
+
+### 1. Immutable & Atomic Publishing
+
+Publishing is a controlled pipeline rather than a direct file overwrite:
+
+```text
+Validate
+   ↓
+Select publishable content
+   ↓
+Collapse language variants
+   ↓
+Deterministic ordering
+   ↓
+Canonical JSON
+   ↓
+SHA-256 hash
+   ↓
+Immutable artifact
+   ↓
+Atomic activation
+```
+
+Catalogue artifacts are content-addressed using their SHA-256 hash. The active catalogue pointer changes only after the new artifact has been successfully generated and validated.
+
+If publishing fails, the previously active catalogue remains available.
+
+**Failed publish ≠ broken viewer.**
+
+### 2. Backend-Enforced Validation
+
+Validation is enforced server-side rather than trusting the client.
+
+Artwork validation inspects the actual image bytes and enforces:
+
+* Poster: `600 × 900`
+* Banner: `1280 × 720`
+* Thumbnail: `640 × 360`
+* Maximum size: `200 KB`
+
+The validation engine returns stable rule IDs with editor-readable messages, including:
+
+* `SHOW_MISSING_SECTION`
+* `EPISODE_MISSING_DURATION`
+* `ARTWORK_INVALID_DIMENSIONS`
+* `DUPLICATE_CONTENT_GROUP_LANGUAGE`
+
+### 3. Language Variants & Season 0
+
+Episodes sharing a `content_group` represent language variants of the same logical episode.
+
+```text
+Episode A — English ┐
+                    ├── One catalogue episode
+Episode A — Hindi   ┘
+```
+
+The published catalogue contains one logical episode with a deterministic `languages` array.
+
+Season `0` is treated as **Trailers** and excluded from the normal season experience.
+
+### 4. Storage Abstraction
+
+Application logic depends on a storage interface rather than a vendor-specific implementation:
+
+```text
+StorageProvider
+├── LocalStorageProvider
+└── R2StorageProvider
+```
+
+Local storage keeps development simple, while Cloudflare R2 provides the production object-storage implementation through its S3-compatible API.
+
+Switching providers is configuration-driven rather than coupled to publishing logic.
+
+### 5. Search & Performance
+
+Catalogue search and filtering are performed server-side.
+
+Supported filters compose across:
+
+* query
+* category
+* language
+* section
+
+The frontend uses cached server-state queries, debounced search, pagination, lazy-loaded artwork, skeleton states, and reserved image dimensions to keep interaction responsive and reduce unnecessary rendering and layout shifts.
+
+At larger catalogue volumes, the search layer can evolve toward PostgreSQL full-text search or a dedicated search index without changing the Viewer contract.
+
+### 6. Security & Access Control
+
+Authentication and authorization are enforced by the API.
+
+* **Editor:** content management
+* **Admin:** privileged administrative and publishing operations
+
+RBAC is enforced server-side; UI visibility is never treated as a security boundary.
+
+Secrets are supplied through environment variables and excluded from version control.
+
+---
+
+## Testing & Quality Gates
+
+The repository includes backend tests focused on high-risk validation and publishing logic, plus frontend linting, type checking, and production builds.
+
+CI runs:
+
+```text
+Backend
+├── pytest
+└── ruff
+
+CMS
+├── lint
+├── typecheck
+└── build
+
+Viewer
+├── lint
+├── typecheck
+└── build
+```
+
+---
 
 ## Running Locally
 
-Requirements:
-- Docker and Docker Compose
+### Requirements
 
-1. Clone the repository.
-2. Run `docker-compose up --build`
-3. Access the applications:
-   - Viewer: `http://localhost:3001`
-   - CMS: `http://localhost:3000` (Login with `admin@peblo.local` / `admin123`)
-   - API: `http://localhost:8000`
+* Docker
+* Docker Compose
+
+```bash
+git clone <repository-url>
+cd peblo-tv-mini
+docker compose up --build
+```
+
+Applications:
+
+| Service | URL                                            |
+| ------- | ---------------------------------------------- |
+| Viewer  | [http://localhost:3001](http://localhost:3001) |
+| CMS     | [http://localhost:3000](http://localhost:3000) |
+| API     | [http://localhost:8000](http://localhost:8000) |
+
+### Demo Admin
+
+```text
+Email: admin@peblo.local
+Password: admin123
+```
+
+Demo credentials are intended for local assessment only. Production deployments must provide secrets through environment configuration.
+
+> **Verification note:** Docker/PostgreSQL container runtime was not executed in the development environment used for this submission. Docker Compose configuration and PostgreSQL migrations are included, but containerized runtime verification remains an environment limitation.
+
+---
+
+## Trade-offs & Scope
+
+A **modular monolith** was chosen instead of microservices because the workload is dominated by transactional content management and publishing rather than independently scalable domains. This keeps deployment and operational complexity low while preserving clear service boundaries.
+
+The Viewer uses **REST + cached server-state queries** instead of GraphQL because the catalogue API has a small, explicit read contract and does not require GraphQL's additional runtime complexity.
+
+A **pre-published catalogue** was chosen instead of reconstructing the catalogue from PostgreSQL on every Viewer request. This adds a publishing step but provides deterministic snapshots, a stable read model, fast consumption, and safer failure behavior.
+
+Distributed queues, Redis, Kafka, Kubernetes, and dedicated search infrastructure were intentionally not introduced because they would add operational complexity without proportional value at this scale.
+
+---
+
+## AI-Assisted Development
+
+AI tools were used as development assistants for implementation, refactoring, debugging, and review.
+
+Generated output was **reviewed, tested, corrected, and selectively accepted**. Architectural decisions, security boundaries, publishing semantics, trade-offs, and final implementation were validated against the challenge requirements rather than accepted blindly.
+
+---
+
+## Submission Snapshot
+
+**Stack:** FastAPI · PostgreSQL · SQLAlchemy · Alembic · React · TypeScript · TanStack Query · Docker · GitHub Actions
+
+**Focus:** validation · RBAC · immutable publishing · deterministic catalogues · storage abstraction · server-side search · responsive UX · operational safety
+
