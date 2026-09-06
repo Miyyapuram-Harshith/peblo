@@ -3,7 +3,7 @@ from __future__ import annotations
 """SQLAlchemy ORM models."""
 import enum
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import (
     Column,
@@ -26,7 +26,7 @@ class Base(DeclarativeBase):
 
 
 def utcnow() -> datetime:
-    return datetime.now(UTC)
+    return datetime.now(timezone.utc)
 
 
 def new_uuid() -> uuid.UUID:

@@ -3,13 +3,28 @@
 Peblo TV is a streaming platform CMS and Viewer built for production scale.
 It consists of a FastAPI backend (PostgreSQL + SQLAlchemy), a React CMS for managing content and publishing, and a React Viewer for end-users to consume published content.
 
-## Architecture Highlights
-- **PostgreSQL Database:** Fully relational, using Async SQLAlchemy 2.0.
-- **Strict RBAC:** Role-based access control (Admin, Editor) via JWTs.
-- **Immutable Publishing:** Content is published via atomic JSON artifacts.
-- **Robust Artwork Validation:** Images are inspected byte-by-byte for size, exact dimensions, and valid formats (Pillow).
-- **R2 Storage:** Supports both local and Cloudflare R2 object storage.
-- **Docker Compose:** Fully containerized setup for easy deployments.
+## Architecture & Setup
+- **PostgreSQL Database:** Fully relational, using Async SQLAlchemy 2.0. SQLite is restricted strictly to an in-memory testing override.
+- **Docker Compose:** Fully containerized setup. Start everything via `docker-compose up --build`.
+
+## Tradeoffs
+- A monolithic FastAPI backend was chosen over microservices to minimize deployment complexity and optimize data integrity.
+- Client-side data fetching uses `react-query` with a traditional REST API instead of GraphQL to leverage simple caching and predictable SQL querying.
+
+## Immutable Publishing
+Content is published via atomic JSON artifacts. The backend computes a deterministic SHA-256 hash of the canonical JSON (collapsing language variants and grouping Season 0 as Trailers) and securely stores it as an immutable artifact in object storage. The active catalogue pointer is then atomically updated in the database to prevent partial state errors.
+
+## Storage
+Images and catalogues are managed through an abstraction layer. It supports a `Local` driver for dev, and a Cloudflare `R2` object storage driver (via boto3 S3 API) for production.
+
+## Search
+The Viewer implements server-side searching through the `/api/catalogue/search` endpoint instead of downloading the catalogue locally, allowing for scalable DB-side querying and filtering.
+
+## Testing & CI
+GitHub Actions is configured to run `pytest` for the backend, as well as `npm run lint`, `typecheck`, and `build` for both React frontends.
+
+## AI Usage
+This project was implemented and verified with AI assistance using the Antigravity IDE and Claude.
 
 ## Running Locally
 
@@ -22,6 +37,3 @@ Requirements:
    - Viewer: `http://localhost:3001`
    - CMS: `http://localhost:3000` (Login with `admin@peblo.local` / `admin123`)
    - API: `http://localhost:8000`
-
-## Testing
-CI automatically runs Pytest for backend and TypeScript/Linting for frontends via GitHub Actions.
