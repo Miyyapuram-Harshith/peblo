@@ -186,37 +186,27 @@ Viewer
 
 ## Running Locally
 
+## Running Locally
+
 ### Requirements
 
-* Docker
-* Docker Compose
+- Docker
+- Docker Compose
 
 ```bash
-git clone(https://github.com/Miyyapuram-Harshith/peblo)
-cd peblo-tv-mini
+git clone https://github.com/Miyyapuram-Harshith/peblo.git
+cd peblo
 docker compose up --build
-```
-
 Applications:
-
-| Service | URL                                            |
-| ------- | ---------------------------------------------- |
-| Viewer  | [http://localhost:3001](http://localhost:3001) |
-| CMS     | [http://localhost:3000](http://localhost:3000) |
-| API     | [http://localhost:8000](http://localhost:8000) |
-
-### Demo Admin
-
-```text
+Service	URL
+Viewer	http://localhost:3001
+CMS	http://localhost:3000
+API	http://localhost:8000
+Demo Admin
 Email: admin@peblo.local
 Password: admin123
-```
-
 Demo credentials are intended for local assessment only. Production deployments must provide secrets through environment configuration.
-
-> **Verification note:** Docker/PostgreSQL container runtime was not executed in the development environment used for this submission. Docker Compose configuration and PostgreSQL migrations are included, but containerized runtime verification remains an environment limitation.
-
----
+Verification note: Docker/PostgreSQL container runtime was not executed in the development environment used for this submission. Docker Compose configuration and PostgreSQL migrations are included, but containerized runtime verification remains an environment limitation.
 
 ## Trade-offs & Scope
 
