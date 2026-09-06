@@ -192,7 +192,7 @@ Viewer
 * Docker Compose
 
 ```bash
-git clone [<repository-url>](https://github.com/Miyyapuram-Harshith/peblo)
+git clone(https://github.com/Miyyapuram-Harshith/peblo)
 cd peblo-tv-mini
 docker compose up --build
 ```
