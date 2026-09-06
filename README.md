@@ -23,9 +23,6 @@ The Viewer implements server-side searching through the `/api/catalogue/search` 
 ## Testing & CI
 GitHub Actions is configured to run `pytest` for the backend, as well as `npm run lint`, `typecheck`, and `build` for both React frontends.
 
-## AI Usage
-This project was implemented and verified with AI assistance using the Antigravity IDE and Claude.
-
 ## Running Locally
 
 Requirements:
