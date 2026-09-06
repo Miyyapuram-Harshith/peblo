@@ -1,9 +1,10 @@
+from __future__ import annotations
+
 """Pydantic schemas for API request/response validation."""
 import uuid
 from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, Field
-
 
 # --- Auth ---
 

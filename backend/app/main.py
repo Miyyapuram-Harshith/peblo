@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Peblo TV Mini - FastAPI Application."""
 import uuid
 from contextlib import asynccontextmanager
@@ -10,7 +12,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.api.routes import artwork, auth, catalogue, episodes, health, seasons, shows
 from app.core.config import get_settings
-from app.core.logging import setup_logging, get_logger
+from app.core.logging import get_logger, setup_logging
 from app.db.session import async_session_factory, engine
 from app.models import Base
 from app.services.seeder import run_seed

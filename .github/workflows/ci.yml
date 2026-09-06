@@ -1,0 +1,52 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        pip install -e ".[dev]"
+    - name: Run Pytest
+      run: |
+        cd backend
+        pytest tests/
+
+  frontend-checks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+    
+    - name: CMS Lint & Build
+      run: |
+        cd cms
+        npm install
+        npm run lint
+        npm run typecheck
+        npm run build
+
+    - name: Viewer Lint & Build
+      run: |
+        cd viewer
+        npm install
+        npm run lint
+        npm run typecheck
+        npm run build

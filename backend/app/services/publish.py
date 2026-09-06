@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 """Publish service - orchestrates atomic catalogue publication."""
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
-from sqlalchemy import select, update
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
@@ -123,7 +125,7 @@ async def publish_catalogue(
             active.active_catalogue_key = catalogue_key
             active.active_catalogue_hash = catalogue.catalogue_hash
             active.version = next_version
-            active.updated_at = datetime.now(timezone.utc)
+            active.updated_at = datetime.now(UTC)
         else:
             active = ActiveCatalogue(
                 id=1,
@@ -138,7 +140,7 @@ async def publish_catalogue(
         # Record success
         elapsed_ms = int((time.monotonic() - start) * 1000)
         run.status = PublishStatus.SUCCESS
-        run.completed_at = datetime.now(timezone.utc)
+        run.completed_at = datetime.now(UTC)
         run.catalogue_key = catalogue_key
         run.catalogue_hash = catalogue.catalogue_hash
         run.shows_count = stats["shows_count"]
@@ -185,7 +187,7 @@ async def publish_catalogue(
         else:
             run.status = PublishStatus.FAILED_BUILD
 
-        run.completed_at = datetime.now(timezone.utc)
+        run.completed_at = datetime.now(UTC)
         run.duration_ms = elapsed_ms
         run.error_code = e.code
         run.error_message = e.message
@@ -207,7 +209,7 @@ async def publish_catalogue(
         stages.append(PublishStage(name="Failed", status="failed", message=str(e)))
 
         run.status = PublishStatus.FAILED_BUILD
-        run.completed_at = datetime.now(timezone.utc)
+        run.completed_at = datetime.now(UTC)
         run.duration_ms = elapsed_ms
         run.error_code = "UNEXPECTED_ERROR"
         run.error_message = str(e)

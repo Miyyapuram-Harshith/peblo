@@ -1,15 +1,17 @@
+from __future__ import annotations
+
 """Episodes CRUD routes."""
 import uuid
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.api.deps import get_storage, require_editor_or_admin
 from app.db.session import get_db
-from app.models import Artwork, ContentStatus, Episode, Season, Show, User
+from app.models import ContentStatus, Episode, Season, Show, User
 from app.schemas.schemas import (
     ArtworkResponse,
     EpisodeCreate,
@@ -210,7 +212,7 @@ async def update_episode(
         if "uq_episode_content_group_language" in str(e):
             raise HTTPException(
                 status_code=409,
-                detail={"error": {"code": "DUPLICATE_CONTENT_GROUP_LANGUAGE", "message": f"This content_group + language combination already exists."}},
+                detail={"error": {"code": "DUPLICATE_CONTENT_GROUP_LANGUAGE", "message": "This content_group + language combination already exists."}},
             )
         raise
 

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Database seeder - loads seed data idempotently."""
 import json
 import re

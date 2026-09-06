@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Health check routes."""
 from typing import Annotated
 

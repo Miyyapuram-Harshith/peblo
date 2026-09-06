@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Artwork validation service using Pillow for server-side image inspection."""
 import io
 import json
@@ -101,7 +103,7 @@ def validate_artwork(
     except Exception:
         raise ArtworkValidationError(
             code="ARTWORK_CORRUPT",
-            message=f"This file could not be read as a valid image. Please ensure you're uploading a JPEG, PNG, or WebP file.",
+            message="This file could not be read as a valid image. Please ensure you're uploading a JPEG, PNG, or WebP file.",
             details={"filename": original_filename},
         )
 
@@ -121,23 +123,16 @@ def validate_artwork(
     actual_width, actual_height = img.size
     expected_width = spec.get("width", 600)
     expected_height = spec.get("height", 900)
-    tolerance = 0.10  # 10% tolerance
 
-    width_min = int(expected_width * (1 - tolerance))
-    width_max = int(expected_width * (1 + tolerance))
-    height_min = int(expected_height * (1 - tolerance))
-    height_max = int(expected_height * (1 + tolerance))
-
-    if not (width_min <= actual_width <= width_max and height_min <= actual_height <= height_max):
+    if actual_width != expected_width or actual_height != expected_height:
         raise ArtworkValidationError(
             code="ARTWORK_DIMENSIONS_INVALID",
-            message=f"This {type_label} is {actual_width} × {actual_height} pixels. {type_label} images should be approximately {expected_width} × {expected_height} pixels (±10%). Please resize the image.",
+            message=f"{type_label} must be {expected_width}x{expected_height} pixels. Uploaded image is {actual_width}x{actual_height}.",
             details={
                 "actual_width": actual_width,
                 "actual_height": actual_height,
                 "expected_width": expected_width,
                 "expected_height": expected_height,
-                "tolerance_percent": 10,
             },
         )
 

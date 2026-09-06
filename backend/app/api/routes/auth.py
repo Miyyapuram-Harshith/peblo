@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Authentication routes."""
 from typing import Annotated
 

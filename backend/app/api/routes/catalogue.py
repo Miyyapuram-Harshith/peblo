@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 """Catalogue publishing and viewer routes."""
 import json
 import uuid
-from typing import Annotated
+from typing import Annotated, Union
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -13,7 +15,6 @@ from app.db.session import get_db
 from app.models import (
     ActiveCatalogue,
     ContentStatus,
-    Episode,
     PublishRun,
     Season,
     Show,
@@ -125,7 +126,7 @@ async def get_validation_report(
 
 # --- Viewer routes (public, no auth) ---
 
-@viewer_router.get("", response_model=CatalogueContract | dict)
+@viewer_router.get("", response_model=Union[CatalogueContract, dict])
 async def get_catalogue(
     db: Annotated[AsyncSession, Depends(get_db)],
     storage: Annotated[StorageProvider, Depends(get_storage)],

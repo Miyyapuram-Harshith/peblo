@@ -1,14 +1,14 @@
+from __future__ import annotations
+
 """SQLAlchemy ORM models."""
 import enum
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy import (
-    Boolean,
     Column,
     DateTime,
     Enum,
-    Float,
     ForeignKey,
     Index,
     Integer,
@@ -16,7 +16,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
 )
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid as UUID
 from sqlalchemy.orm import DeclarativeBase, relationship
 
 
@@ -26,7 +26,7 @@ class Base(DeclarativeBase):
 
 
 def utcnow() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 def new_uuid() -> uuid.UUID:
@@ -141,7 +141,7 @@ class Episode(Base):
     updated_at = Column(DateTime(timezone=True), nullable=False, default=utcnow, onupdate=utcnow)
 
     season = relationship("Season", back_populates="episodes")
-    artwork = relationship("Artwork", primaryjoin="and_(Artwork.owner_id==Episode.id, Artwork.owner_type=='episode')", foreign_keys="Artwork.owner_id", cascade="all, delete-orphan", lazy="selectin")
+    artwork = relationship("Artwork", primaryjoin="and_(Artwork.owner_id==Episode.id, Artwork.owner_type=='episode')", foreign_keys="Artwork.owner_id", cascade="all, delete-orphan", lazy="selectin", overlaps="artwork")
 
     __table_args__ = (
         UniqueConstraint("content_group", "language", name="uq_episode_content_group_language"),

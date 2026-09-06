@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 """API dependencies - authentication, authorization, common deps."""
 import uuid
 from typing import Annotated
 
-from fastapi import Depends, Header, HTTPException, status
+from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession

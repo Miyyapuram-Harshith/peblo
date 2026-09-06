@@ -1,16 +1,18 @@
+from __future__ import annotations
+
 """Shows CRUD routes."""
 import re
 import uuid
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.api.deps import get_storage, require_editor_or_admin
 from app.db.session import get_db
-from app.models import Artwork, ContentStatus, Season, Show, User
+from app.models import ContentStatus, Show, User
 from app.schemas.schemas import (
     ArtworkResponse,
     ShowCreate,

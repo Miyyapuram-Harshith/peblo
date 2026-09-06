@@ -1,19 +1,18 @@
+from __future__ import annotations
+
 """Validation engine for content publishing readiness."""
 import json
 from pathlib import Path
 
-from sqlalchemy import func, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.core.config import get_settings
 from app.core.logging import get_logger
 from app.models import (
-    Artwork,
     ArtworkType,
     ContentStatus,
-    Episode,
-    OwnerType,
     Season,
     Show,
 )

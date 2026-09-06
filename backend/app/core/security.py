@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 """Security utilities: password hashing and JWT."""
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -23,7 +25,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
     """Create a JWT access token."""
     settings = get_settings()
     to_encode = data.copy()
-    expire = datetime.now(timezone.utc) + (
+    expire = datetime.now(UTC) + (
         expires_delta or timedelta(minutes=settings.jwt_expiry_minutes)
     )
     to_encode.update({"exp": expire})

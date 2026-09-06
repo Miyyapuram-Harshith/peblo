@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 """Catalogue builder service - creates deterministic, immutable catalogue artifacts."""
 import hashlib
 import json
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,7 +13,6 @@ from sqlalchemy.orm import selectinload
 from app.core.logging import get_logger
 from app.models import (
     Artwork,
-    ArtworkType,
     ContentStatus,
     Episode,
     OwnerType,
@@ -145,7 +146,7 @@ class CatalogueBuilder:
             for section, shows in sorted(sections_map.items())
         ]
 
-        generated_at = datetime.now(timezone.utc).isoformat()
+        generated_at = datetime.now(UTC).isoformat()
         catalogue = CatalogueContract(
             version=version,
             generated_at=generated_at,
