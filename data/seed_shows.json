@@ -1,0 +1,700 @@
+{
+  "shows": [
+    {
+      "title": "Moti and Friends",
+      "synopsis": "Join Moti the elephant and his friends on exciting adventures across India, learning about friendship, courage, and the beauty of diversity.",
+      "section": "Featured",
+      "category": "Animation",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 0,
+          "title": "Trailers",
+          "episodes": [
+            {
+              "title": "Moti and Friends - Official Trailer",
+              "synopsis": "Meet Moti and his amazing friends in this exciting preview of their adventures across India.",
+              "duration_seconds": 120,
+              "content_group": "moti-trailer-01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s0/trailer-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Moti and Friends - Official Trailer",
+              "synopsis": "मोती और उसके अद्भुत दोस्तों से मिलिए, भारत भर में उनके रोमांचक कारनामों की इस रोमांचक झलक में।",
+              "duration_seconds": 120,
+              "content_group": "moti-trailer-01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s0/trailer-hi.mp4",
+              "status": "published"
+            }
+          ]
+        },
+        {
+          "season_number": 1,
+          "title": "Season 1: The Beginning",
+          "episodes": [
+            {
+              "title": "The New Neighbor",
+              "synopsis": "Moti meets a new friend who has just moved to the village.",
+              "duration_seconds": 660,
+              "content_group": "moti-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "नया पड़ोसी",
+              "synopsis": "मोती एक नए दोस्त से मिलता है जो अभी गाँव में आया है।",
+              "duration_seconds": 660,
+              "content_group": "moti-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The River Adventure",
+              "synopsis": "Moti and friends discover a secret path along the river.",
+              "duration_seconds": 720,
+              "content_group": "moti-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "नदी का रोमांच",
+              "synopsis": "मोती और दोस्त नदी के किनारे एक गुप्त रास्ता खोजते हैं।",
+              "duration_seconds": 720,
+              "content_group": "moti-s1e02",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e02-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The Big Storm",
+              "synopsis": "A monsoon storm tests the friendship of Moti and his friends.",
+              "duration_seconds": 680,
+              "content_group": "moti-s1e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e03-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "बड़ा तूफ़ान",
+              "synopsis": "एक मानसूनी तूफ़ान मोती और उसके दोस्तों की दोस्ती की परीक्षा लेता है।",
+              "duration_seconds": 680,
+              "content_group": "moti-s1e03",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e03-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Festival of Colors",
+              "synopsis": "Moti and friends celebrate Holi with the whole village.",
+              "duration_seconds": 750,
+              "content_group": "moti-s1e04",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e04-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "रंगों का त्योहार",
+              "synopsis": "मोती और दोस्त पूरे गाँव के साथ होली मनाते हैं।",
+              "duration_seconds": 750,
+              "content_group": "moti-s1e04",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e04-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The Lost Kite",
+              "synopsis": "Moti's kite flies away and he goes on a journey to find it.",
+              "duration_seconds": 690,
+              "content_group": "moti-s1e05",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e05-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "खोई हुई पतंग",
+              "synopsis": "मोती की पतंग उड़ जाती है और वह उसे ढूंढने की यात्रा पर निकलता है।",
+              "duration_seconds": 690,
+              "content_group": "moti-s1e05",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s1/e05-hi.mp4",
+              "status": "published"
+            }
+          ]
+        },
+        {
+          "season_number": 2,
+          "title": "Season 2: New Horizons",
+          "episodes": [
+            {
+              "title": "Moti in Rajasthan",
+              "synopsis": "Moti visits the desert state of Rajasthan and meets new friends.",
+              "duration_seconds": 700,
+              "content_group": "moti-s2e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s2/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "मोती राजस्थान में",
+              "synopsis": "मोती रेगिस्तानी राज्य राजस्थान जाता है और नए दोस्तों से मिलता है।",
+              "duration_seconds": 700,
+              "content_group": "moti-s2e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s2/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The Mountain Trek",
+              "synopsis": "An exciting trek through the Himalayas with unexpected challenges.",
+              "duration_seconds": 730,
+              "content_group": "moti-s2e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s2/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "पहाड़ की चढ़ाई",
+              "synopsis": "हिमालय में अप्रत्याशित चुनौतियों के साथ एक रोमांचक यात्रा।",
+              "duration_seconds": 730,
+              "content_group": "moti-s2e02",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s2/e02-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Backwaters of Kerala",
+              "synopsis": "Moti explores the beautiful backwaters of Kerala on a houseboat.",
+              "duration_seconds": 710,
+              "content_group": "moti-s2e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/moti/s2/e03-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "केरल की बैकवाटर",
+              "synopsis": "मोती हाउसबोट पर केरल की सुंदर बैकवाटर की खोज करता है।",
+              "duration_seconds": 710,
+              "content_group": "moti-s2e03",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/moti/s2/e03-hi.mp4",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chiku's Science Lab",
+      "synopsis": "Chiku the curious monkey explores the wonders of science through fun experiments that kids can try at home.",
+      "section": "Learning",
+      "category": "Educational",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Kitchen Science",
+          "episodes": [
+            {
+              "title": "Volcano in a Bottle",
+              "synopsis": "Chiku creates a volcano using everyday kitchen items.",
+              "duration_seconds": 480,
+              "content_group": "chiku-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/chiku/s1/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "बोतल में ज्वालामुखी",
+              "synopsis": "चीकू रोज़मर्रा की रसोई की चीज़ों से ज्वालामुखी बनाता है।",
+              "duration_seconds": 480,
+              "content_group": "chiku-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/chiku/s1/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Rainbow Milk",
+              "synopsis": "Learn how soap interacts with milk to create beautiful rainbow patterns.",
+              "duration_seconds": 450,
+              "content_group": "chiku-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/chiku/s1/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "इंद्रधनुषी दूध",
+              "synopsis": "जानिए कैसे साबुन दूध के साथ मिलकर सुंदर इंद्रधनुष के पैटर्न बनाता है।",
+              "duration_seconds": 450,
+              "content_group": "chiku-s1e02",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/chiku/s1/e02-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Invisible Ink",
+              "synopsis": "Chiku discovers how to write secret messages using lemon juice.",
+              "duration_seconds": 500,
+              "content_group": "chiku-s1e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/chiku/s1/e03-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "अदृश्य स्याही",
+              "synopsis": "चीकू नींबू के रस से गुप्त संदेश लिखना सीखता है।",
+              "duration_seconds": 500,
+              "content_group": "chiku-s1e03",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/chiku/s1/e03-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Dancing Raisins",
+              "synopsis": "Watch raisins dance in a glass of soda - learn about CO2!",
+              "duration_seconds": 420,
+              "content_group": "chiku-s1e04",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/chiku/s1/e04-en.mp4",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Rani the Brave",
+      "synopsis": "Follow Rani, a fearless girl from a small village, as she stands up for what's right and inspires her community.",
+      "section": "Adventure",
+      "category": "Adventure",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 0,
+          "title": "Trailers",
+          "episodes": [
+            {
+              "title": "Rani the Brave - Coming Soon",
+              "synopsis": "Get ready for Rani's incredible adventures!",
+              "duration_seconds": 90,
+              "content_group": "rani-trailer-01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/rani/s0/trailer-en.mp4",
+              "status": "published"
+            }
+          ]
+        },
+        {
+          "season_number": 1,
+          "title": "Season 1: Village Tales",
+          "episodes": [
+            {
+              "title": "The Tiger's Trail",
+              "synopsis": "Rani discovers tiger tracks near her village and sets out to protect both the village and the tiger.",
+              "duration_seconds": 780,
+              "content_group": "rani-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "बाघ की पगडंडी",
+              "synopsis": "रानी को अपने गाँव के पास बाघ के पैरों के निशान मिलते हैं और वह गाँव और बाघ दोनों की रक्षा के लिए निकलती है।",
+              "duration_seconds": 780,
+              "content_group": "rani-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The Water Problem",
+              "synopsis": "When the village well runs dry, Rani leads the search for a new water source.",
+              "duration_seconds": 740,
+              "content_group": "rani-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "पानी की समस्या",
+              "synopsis": "जब गाँव का कुआँ सूख जाता है, रानी नए पानी के स्रोत की खोज का नेतृत्व करती है।",
+              "duration_seconds": 740,
+              "content_group": "rani-s1e02",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e02-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The School Play",
+              "synopsis": "Rani organizes the village's first school play despite many obstacles.",
+              "duration_seconds": 700,
+              "content_group": "rani-s1e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e03-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "स्कूल का नाटक",
+              "synopsis": "रानी कई बाधाओं के बावजूद गाँव का पहला स्कूल नाटक आयोजित करती है।",
+              "duration_seconds": 700,
+              "content_group": "rani-s1e03",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e03-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Harvest Moon",
+              "synopsis": "The harvest festival brings the whole village together in celebration.",
+              "duration_seconds": 760,
+              "content_group": "rani-s1e04",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e04-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "फसल का चाँद",
+              "synopsis": "फसल का त्योहार पूरे गाँव को जश्न में एक साथ लाता है।",
+              "duration_seconds": 760,
+              "content_group": "rani-s1e04",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/rani/s1/e04-hi.mp4",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dadi's Kitchen",
+      "synopsis": "Dadi shares traditional Indian recipes while telling stories about the origins and cultural significance of each dish.",
+      "section": "Learning",
+      "category": "Educational",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Festive Flavors",
+          "episodes": [
+            {
+              "title": "The Perfect Ladoo",
+              "synopsis": "Dadi teaches how to make the perfect ladoo for Diwali celebrations.",
+              "duration_seconds": 540,
+              "content_group": "dadi-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/dadi/s1/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "परफेक्ट लड्डू",
+              "synopsis": "दादी दिवाली के जश्न के लिए परफेक्ट लड्डू बनाना सिखाती हैं।",
+              "duration_seconds": 540,
+              "content_group": "dadi-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/dadi/s1/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Pongal Special",
+              "synopsis": "Learn the traditional way to make Pongal during the harvest festival.",
+              "duration_seconds": 560,
+              "content_group": "dadi-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/dadi/s1/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "பொங்கல் ஸ்பெஷல்",
+              "synopsis": "அறுவடைத் திருநாளின் போது பாரம்பரிய முறையில் பொங்கல் செய்வது எப்படி என்று கற்றுக்கொள்ளுங்கள்.",
+              "duration_seconds": 560,
+              "content_group": "dadi-s1e02",
+              "language": "Tamil",
+              "video_url": "https://cdn.peblo.tv/dadi/s1/e02-ta.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Mango Lassi Magic",
+              "synopsis": "A refreshing summer recipe that brings the family together.",
+              "duration_seconds": 380,
+              "content_group": "dadi-s1e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/dadi/s1/e03-en.mp4",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Space Cadets",
+      "synopsis": "Three young astronauts-in-training explore the solar system, learning about planets, stars, and the wonders of space.",
+      "section": "Featured",
+      "category": "Educational",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Inner Planets",
+          "episodes": [
+            {
+              "title": "Mission Mercury",
+              "synopsis": "The cadets visit the closest planet to the Sun and learn about extreme temperatures.",
+              "duration_seconds": 620,
+              "content_group": "space-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/space/s1/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "मिशन बुध",
+              "synopsis": "कैडेट सूर्य के सबसे करीबी ग्रह पर जाते हैं और अत्यधिक तापमान के बारे में सीखते हैं।",
+              "duration_seconds": 620,
+              "content_group": "space-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/space/s1/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Venus Clouds",
+              "synopsis": "Exploring the thick atmosphere and clouds of Venus.",
+              "duration_seconds": 640,
+              "content_group": "space-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/space/s1/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "शुक्र के बादल",
+              "synopsis": "शुक्र ग्रह के घने वायुमंडल और बादलों की खोज।",
+              "duration_seconds": 640,
+              "content_group": "space-s1e02",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/space/s1/e02-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Our Home Earth",
+              "synopsis": "The cadets look at Earth from space and learn what makes our planet special.",
+              "duration_seconds": 0,
+              "content_group": "space-s1e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/space/s1/e03-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Mars Rover",
+              "synopsis": "Landing on Mars and driving a rover across the red planet.",
+              "duration_seconds": 680,
+              "content_group": "space-s1e04",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/space/s1/e04-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "मंगल रोवर",
+              "synopsis": "मंगल ग्रह पर उतरना और लाल ग्रह पर रोवर चलाना।",
+              "duration_seconds": 680,
+              "content_group": "space-s1e04",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/space/s1/e04-hi.mp4",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Jungle Beats",
+      "synopsis": "Animals of the Indian jungle come together to form a musical band, teaching rhythm, melody, and teamwork.",
+      "section": "Stories",
+      "category": "Musical",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Finding the Beat",
+          "episodes": [
+            {
+              "title": "The Drumming Elephant",
+              "synopsis": "An elephant discovers his talent for drumming and starts a band.",
+              "duration_seconds": 520,
+              "content_group": "jungle-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/jungle/s1/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "ड्रमिंग हाथी",
+              "synopsis": "एक हाथी को ड्रम बजाने की अपनी प्रतिभा का पता चलता है और वह एक बैंड शुरू करता है।",
+              "duration_seconds": 520,
+              "content_group": "jungle-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/jungle/s1/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "Singing Parrot",
+              "synopsis": "A parrot with the most beautiful voice joins the jungle band.",
+              "duration_seconds": 490,
+              "content_group": "jungle-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/jungle/s1/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "गाने वाला तोता",
+              "synopsis": "सबसे सुंदर आवाज़ वाला तोता जंगल बैंड में शामिल होता है।",
+              "duration_seconds": 490,
+              "content_group": "jungle-s1e02",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/jungle/s1/e02-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The Grand Concert",
+              "synopsis": "The jungle band performs their first concert for all the animals.",
+              "duration_seconds": 600,
+              "content_group": "jungle-s1e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/jungle/s1/e03-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "भव्य संगीत समारोह",
+              "synopsis": "जंगल बैंड सभी जानवरों के लिए अपना पहला संगीत समारोह प्रस्तुत करता है।",
+              "duration_seconds": 600,
+              "content_group": "jungle-s1e03",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/jungle/s1/e03-hi.mp4",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Little Architects",
+      "synopsis": "Children learn about famous Indian architecture and try to build their own models using simple materials.",
+      "section": "Learning",
+      "category": "Educational",
+      "status": "draft",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Monuments",
+          "episodes": [
+            {
+              "title": "The Taj Mahal",
+              "synopsis": "Learn about the history of the Taj Mahal and build a model.",
+              "duration_seconds": 600,
+              "content_group": "arch-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/arch/s1/e01-en.mp4",
+              "status": "draft"
+            },
+            {
+              "title": "ताज महल",
+              "synopsis": "ताज महल के इतिहास के बारे में जानें और एक मॉडल बनाएं।",
+              "duration_seconds": 600,
+              "content_group": "arch-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/arch/s1/e01-hi.mp4",
+              "status": "draft"
+            },
+            {
+              "title": "Qutub Minar",
+              "synopsis": "Discover the tallest brick minaret in the world.",
+              "duration_seconds": 580,
+              "content_group": "arch-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/arch/s1/e02-en.mp4",
+              "status": "draft"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Nani's Folktales",
+      "synopsis": "Grandmother Nani narrates timeless Indian folktales passed down through generations, teaching moral values and cultural wisdom.",
+      "section": "Stories",
+      "category": "Drama",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Wisdom Tales",
+          "episodes": [
+            {
+              "title": "The Clever Fox",
+              "synopsis": "A clever fox outsmarts a greedy lion using wit and wisdom.",
+              "duration_seconds": 520,
+              "content_group": "nani-s1e01",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/nani/s1/e01-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "चालाक लोमड़ी",
+              "synopsis": "एक चालाक लोमड़ी बुद्धि और ज्ञान से एक लालची शेर को मात देती है।",
+              "duration_seconds": 520,
+              "content_group": "nani-s1e01",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/nani/s1/e01-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The Magic Pot",
+              "synopsis": "A poor farmer finds a pot that doubles everything put into it.",
+              "duration_seconds": 540,
+              "content_group": "nani-s1e02",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/nani/s1/e02-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "जादुई बर्तन",
+              "synopsis": "एक गरीब किसान को एक बर्तन मिलता है जो उसमें रखी हर चीज़ को दोगुना कर देता है।",
+              "duration_seconds": 540,
+              "content_group": "nani-s1e02",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/nani/s1/e02-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "The Singing River",
+              "synopsis": "A river that sings teaches a village about the importance of water conservation.",
+              "duration_seconds": 560,
+              "content_group": "nani-s1e03",
+              "language": "English",
+              "video_url": "https://cdn.peblo.tv/nani/s1/e03-en.mp4",
+              "status": "published"
+            },
+            {
+              "title": "गाती नदी",
+              "synopsis": "एक गाती हुई नदी गाँव को पानी के संरक्षण के महत्व के बारे में सिखाती है।",
+              "duration_seconds": 560,
+              "content_group": "nani-s1e03",
+              "language": "Hindi",
+              "video_url": "https://cdn.peblo.tv/nani/s1/e03-hi.mp4",
+              "status": "published"
+            },
+            {
+              "title": "తెలివైన నక్క",
+              "synopsis": "ఒక తెలివైన నక్క బుద్ధి మరియు జ్ఞానంతో అత్యాశ సింహాన్ని ఓడిస్తుంది.",
+              "duration_seconds": 520,
+              "content_group": "nani-s1e01",
+              "language": "Telugu",
+              "video_url": "https://cdn.peblo.tv/nani/s1/e01-te.mp4",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

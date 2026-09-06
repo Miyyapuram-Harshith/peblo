@@ -1,0 +1,31 @@
+{
+  "sections": ["Featured", "Adventure", "Learning", "Stories"],
+  "categories": ["Animation", "Educational", "Adventure", "Comedy", "Drama", "Musical"],
+  "languages": ["English", "Hindi", "Tamil", "Telugu"],
+  "statuses": ["draft", "published", "archived"],
+  "artwork": {
+    "poster": {
+      "aspect_ratio": "2:3",
+      "width": 600,
+      "height": 900,
+      "max_size_bytes": 204800,
+      "formats": ["image/jpeg", "image/png", "image/webp"]
+    },
+    "banner": {
+      "aspect_ratio": "16:9",
+      "width": 1280,
+      "height": 720,
+      "max_size_bytes": 204800,
+      "formats": ["image/jpeg", "image/png", "image/webp"]
+    },
+    "thumbnail": {
+      "aspect_ratio": "16:9",
+      "width": 640,
+      "height": 360,
+      "max_size_bytes": 204800,
+      "formats": ["image/jpeg", "image/png", "image/webp"]
+    }
+  },
+  "dimension_tolerance_percent": 10,
+  "aspect_ratio_tolerance_percent": 5
+}

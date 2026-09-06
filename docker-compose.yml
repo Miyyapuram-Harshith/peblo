@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: peblo
+      POSTGRES_PASSWORD: peblo_dev
+      POSTGRES_DB: peblo
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U peblo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://peblo:peblo_dev@postgres:5432/peblo
+      DATABASE_URL_SYNC: postgresql://peblo:peblo_dev@postgres:5432/peblo
+      SECRET_KEY: docker-dev-secret-change-in-production
+      JWT_SECRET: docker-dev-jwt-secret-change-in-production
+      STORAGE_BACKEND: local
+      STORAGE_LOCAL_PATH: /app/storage
+      STORAGE_PUBLIC_URL_PREFIX: http://localhost:8000/storage
+      CORS_ORIGINS: http://localhost:3000,http://localhost:3001,http://localhost:5173,http://localhost:5174
+      SEED_ON_STARTUP: "true"
+      SEED_DATA_PATH: /app/data
+      PUBLISH_FAILURE_INJECTION: "false"
+      DEMO_ADMIN_EMAIL: admin@peblo.local
+      DEMO_ADMIN_PASSWORD: admin123
+      DEMO_EDITOR_EMAIL: editor@peblo.local
+      DEMO_EDITOR_PASSWORD: editor123
+    volumes:
+      - storage_data:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  cms:
+    build:
+      context: ./cms
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+  viewer:
+    build:
+      context: ./viewer
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  storage_data:
