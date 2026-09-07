@@ -239,7 +239,11 @@ function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <span className="brand-mark">P</span>
+            <img
+              src="/peblo-logo.png"
+              alt="Peblo"
+              className="brand-logo"
+            />
             <span>Peblo TV</span>
           </button>
 
@@ -302,9 +306,9 @@ function App() {
               <button
                 className="primary-button"
                 onClick={() => {
-                    setSelectedLanguage(null);
-                    setSelectedShow(heroShow);
-                  }}
+                  setSelectedLanguage(null);
+                  setSelectedShow(heroShow);
+                }}
               >
                 <span>▶</span>
                 Explore Show
@@ -523,8 +527,13 @@ function App() {
 
       <footer className="footer">
         <div className="footer-brand">
-          <span className="brand-mark">P</span>
+          <img
+            src="/peblo-logo.png"
+            alt="Peblo"
+            className="brand-logo"
+          />
           <span>Peblo TV</span>
+
         </div>
 
         <p>
