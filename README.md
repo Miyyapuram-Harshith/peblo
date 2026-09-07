@@ -221,7 +221,7 @@ Applications:
 ### Demo Admin
 
 ```text
-Email: admin@peblo.local
+Email: admin@peblo.test
 Password: admin123
 ```
 

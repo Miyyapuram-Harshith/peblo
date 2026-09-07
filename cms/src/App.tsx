@@ -82,7 +82,7 @@ function LoginPage() {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label" htmlFor="email">Email</label>
-            <input id="email" className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="admin@peblo.local" required autoFocus />
+            <input id="email" className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="admin@peblo.test" required autoFocus />
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="password">Password</label>
@@ -95,8 +95,8 @@ function LoginPage() {
         </form>
         <div style={{ marginTop: 24, padding: 16, background: '#f8fafc', borderRadius: 8, fontSize: '0.8rem', color: '#64748b' }}>
           <strong>Demo Credentials</strong><br />
-          Admin: admin@peblo.local / admin123<br />
-          Editor: editor@peblo.local / editor123
+          Admin: admin@peblo.test / admin123<br />
+          Editor: editor@peblo.test / editor123
         </div>
       </div>
     </div>
