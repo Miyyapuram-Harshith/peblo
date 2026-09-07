@@ -35,9 +35,9 @@ services:
       SEED_ON_STARTUP: "true"
       SEED_DATA_PATH: /app/data
       PUBLISH_FAILURE_INJECTION: "false"
-      DEMO_ADMIN_EMAIL: admin@peblo.local
+      DEMO_ADMIN_EMAIL: admin@peblo.test
       DEMO_ADMIN_PASSWORD: admin123
-      DEMO_EDITOR_EMAIL: editor@peblo.local
+      DEMO_EDITOR_EMAIL: editor@peblo.test
       DEMO_EDITOR_PASSWORD: editor123
     volumes:
       - storage_data:/app/storage
