@@ -4,6 +4,7 @@ Revision ID: a0b4e433edae
 Revises: 
 Create Date: 2026-09-07 00:25:38.998361
 """
+from __future__ import annotations
 from collections.abc import Sequence
 
 import sqlalchemy as sa
@@ -23,11 +24,7 @@ def upgrade() -> None:
     owner_type = sa.Enum('SHOW', 'EPISODE', name='ownertype')
     publish_status = sa.Enum('PENDING', 'VALIDATING', 'BUILDING', 'STORING', 'ACTIVATING', 'SUCCESS', 'FAILED_VALIDATION', 'FAILED_BUILD', 'FAILED_STORAGE', 'FAILED_ACTIVATION', name='publishstatus')
 
-    user_role.create(op.get_bind(), checkfirst=True)
-    content_status.create(op.get_bind(), checkfirst=True)
-    artwork_type.create(op.get_bind(), checkfirst=True)
-    owner_type.create(op.get_bind(), checkfirst=True)
-    publish_status.create(op.get_bind(), checkfirst=True)
+
 
     # active_catalogue
     op.create_table('active_catalogue',
@@ -44,7 +41,7 @@ def upgrade() -> None:
         sa.Column('id', sa.Uuid(as_uuid=True), nullable=False),
         sa.Column('email', sa.String(length=255), nullable=False),
         sa.Column('password_hash', sa.String(length=255), nullable=False),
-        sa.Column('role', user_role, nullable=False),
+        sa.Column('role', user_role, nullable=False, create_type=False),
         sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
         sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
         sa.PrimaryKeyConstraint('id')
