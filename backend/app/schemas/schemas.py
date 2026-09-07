@@ -9,7 +9,7 @@ from pydantic import BaseModel, EmailStr, Field
 # --- Auth ---
 
 class LoginRequest(BaseModel):
-    email: EmailStr
+    email: str = Field(min_length=3)
     password: str = Field(min_length=1)
 
 

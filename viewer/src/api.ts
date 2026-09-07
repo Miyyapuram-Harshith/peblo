@@ -7,7 +7,10 @@ class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  private async request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  private async request<T>(
+    path: string,
+    options: RequestInit = {},
+  ): Promise<T> {
     const response = await fetch(`${this.baseUrl}${path}`, {
       ...options,
       headers: {
@@ -27,8 +30,35 @@ class ApiClient {
     return this.request<any>('/api/v1/catalog');
   }
 
-  async searchCatalogue(query: string) {
-    return this.request<any>(`/api/v1/catalog/search?q=${encodeURIComponent(query)}`);
+  async searchCatalogue(params: {
+    q?: string;
+    category?: string;
+    language?: string;
+    section?: string;
+  }) {
+    const searchParams = new URLSearchParams();
+
+    if (params.q?.trim()) {
+      searchParams.set('q', params.q.trim());
+    }
+
+    if (params.category) {
+      searchParams.set('category', params.category);
+    }
+
+    if (params.language) {
+      searchParams.set('language', params.language);
+    }
+
+    if (params.section) {
+      searchParams.set('section', params.section);
+    }
+
+    const query = searchParams.toString();
+
+    return this.request<any>(
+      `/api/v1/catalog/search${query ? `?${query}` : ''}`,
+    );
   }
 }
 
