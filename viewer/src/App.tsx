@@ -68,6 +68,10 @@ function formatDuration(seconds: number) {
 
 function App() {
   const [search, setSearch] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedLanguageFilter, setSelectedLanguageFilter] = useState('');
+  const [selectedSection, setSelectedSection] = useState('');
+
   const [selectedShow, setSelectedShow] = useState<Show | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 
@@ -79,7 +83,9 @@ function App() {
   const catalogue = data;
 
   /*
-   * Flatten the catalogue so filtering stays simple and deterministic.
+   * Flatten the published catalogue.
+   * We keep complete Show objects locally so filtered results
+   * can still open the full details page.
    */
   const allShows = useMemo(() => {
     if (!catalogue?.sections) return [];
@@ -88,48 +94,103 @@ function App() {
   }, [catalogue]);
 
   /*
-   * Search across:
-   * - show title
-   * - show synopsis
-   * - category
-   * - episode title
-   * - episode synopsis
+   * Server-side search and filtering.
+   *
+   * The API returns lightweight search results. We use their IDs
+   * to select the corresponding complete Show objects from the
+   * published catalogue.
    */
+  const hasFilters =
+    search.trim().length > 0 ||
+    selectedCategory.length > 0 ||
+    selectedLanguageFilter.length > 0 ||
+    selectedSection.length > 0;
+
+  const {
+    data: filteredResults,
+    isLoading: isFilterLoading,
+    isError: isFilterError,
+  } = useQuery({
+    queryKey: [
+      'catalogue-search',
+      search,
+      selectedCategory,
+      selectedLanguageFilter,
+      selectedSection,
+    ],
+    queryFn: () =>
+      api.searchCatalogue({
+        q: search,
+        category: selectedCategory,
+        language: selectedLanguageFilter,
+        section: selectedSection,
+      }),
+    enabled: hasFilters,
+  });
+
   const filteredSections = useMemo(() => {
     if (!catalogue?.sections) return [];
 
-    const query = search.trim().toLowerCase();
-
-    if (!query) {
+    if (!hasFilters) {
       return catalogue.sections;
     }
 
+    const resultIds = new Set(
+      (filteredResults?.results || []).map(
+        (result: { id: string }) => result.id,
+      ),
+    );
+
     return catalogue.sections
-      .map((section) => {
-        const shows = section.shows.filter((show) => {
-          const showMatches =
-            show.title.toLowerCase().includes(query) ||
-            show.category.toLowerCase().includes(query) ||
-            show.synopsis.toLowerCase().includes(query);
-
-          const episodeMatches = show.seasons.some((season) =>
-            season.episodes.some(
-              (episode) =>
-                episode.title.toLowerCase().includes(query) ||
-                episode.synopsis.toLowerCase().includes(query),
-            ),
-          );
-
-          return showMatches || episodeMatches;
-        });
-
-        return {
-          ...section,
-          shows,
-        };
-      })
+      .map((section) => ({
+        ...section,
+        shows: section.shows.filter((show) => resultIds.has(show.id)),
+      }))
       .filter((section) => section.shows.length > 0);
-  }, [catalogue, search]);
+  }, [catalogue, filteredResults, hasFilters]);
+
+  const categories = useMemo(() => {
+    return Array.from(
+      new Set(
+        allShows
+          .map((show) => show.category)
+          .filter(Boolean),
+      ),
+    ).sort();
+  }, [allShows]);
+
+  const sections = useMemo(() => {
+    return Array.from(
+      new Set(
+        catalogue?.sections
+          ?.map((section) => section.section)
+          .filter(Boolean) || [],
+      ),
+    ).sort();
+  }, [catalogue]);
+
+  const languages = useMemo(() => {
+    return Array.from(
+      new Set(
+        allShows.flatMap((show) =>
+          show.seasons.flatMap((season) =>
+            season.episodes.flatMap((episode) =>
+              episode.languages.map(
+                (language) => language.language,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ).sort();
+  }, [allShows]);
+
+  const clearFilters = () => {
+    setSearch('');
+    setSelectedCategory('');
+    setSelectedLanguageFilter('');
+    setSelectedSection('');
+  };
 
   /*
    * Pick a strong hero show.
@@ -173,6 +234,8 @@ function App() {
             className="brand"
             onClick={() => {
               setSelectedShow(null);
+              setSelectedLanguage(null);
+              clearFilters();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
@@ -194,7 +257,7 @@ function App() {
             {search && (
               <button
                 className="search-clear"
-                onClick={() => setSearch('')}
+                onClick={clearFilters}
                 aria-label="Clear search"
               >
                 ×
@@ -205,7 +268,7 @@ function App() {
       </header>
 
       {/* HERO */}
-      {!search && heroShow && (
+      {!hasFilters && heroShow && (
         <section className="hero">
           <div
             className="hero-background"
@@ -238,7 +301,10 @@ function App() {
             <div className="hero-actions">
               <button
                 className="primary-button"
-                onClick={() => setSelectedShow(heroShow)}
+                onClick={() => {
+                    setSelectedLanguage(null);
+                    setSelectedShow(heroShow);
+                  }}
               >
                 <span>▶</span>
                 Explore Show
@@ -255,16 +321,98 @@ function App() {
         </section>
       )}
 
+      {/* FILTER BAR */}
+      <div className="filter-bar">
+        <div className="filter-inner">
+          <div className="filter-group">
+            <span className="filter-label">Category</span>
+
+            <select
+              className="filter-select"
+              value={selectedCategory}
+              onChange={(event) =>
+                setSelectedCategory(event.target.value)
+              }
+              aria-label="Filter by category"
+            >
+              <option value="">All categories</option>
+
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="filter-group">
+            <span className="filter-label">Language</span>
+
+            <select
+              className="filter-select"
+              value={selectedLanguageFilter}
+              onChange={(event) =>
+                setSelectedLanguageFilter(event.target.value)
+              }
+              aria-label="Filter by language"
+            >
+              <option value="">All languages</option>
+
+              {languages.map((language) => (
+                <option key={language} value={language}>
+                  {language}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="filter-group">
+            <span className="filter-label">Section</span>
+
+            <select
+              className="filter-select"
+              value={selectedSection}
+              onChange={(event) =>
+                setSelectedSection(event.target.value)
+              }
+              aria-label="Filter by section"
+            >
+              <option value="">All sections</option>
+
+              {sections.map((section) => (
+                <option key={section} value={section}>
+                  {section}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {hasFilters && (
+            <button
+              className="clear-filters"
+              onClick={clearFilters}
+            >
+              Clear filters
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* MAIN */}
       <main className="main-content">
-        {search && (
+        {hasFilters && (
           <div className="search-heading">
-            <span>Search results for</span>
-            <strong>"{search}"</strong>
+            <span>Showing</span>
+            <strong>
+              {filteredResults?.total ?? 0}{' '}
+              {(filteredResults?.total ?? 0) === 1
+                ? 'result'
+                : 'results'}
+            </strong>
           </div>
         )}
 
-        {isLoading && (
+        {(isLoading || isFilterLoading) && (
           <div className="loading-grid">
             {Array.from({ length: 8 }).map((_, index) => (
               <div className="skeleton-card" key={index}>
@@ -276,7 +424,7 @@ function App() {
           </div>
         )}
 
-        {isError && (
+        {(isError || isFilterError) && (
           <div className="state-card">
             <div className="state-icon">⚠</div>
             <h2>Something went wrong</h2>
@@ -294,7 +442,7 @@ function App() {
               <div className="state-icon">⌕</div>
               <h2>No results found</h2>
               <p>
-                Try searching for another show, episode, or category.
+                Try another search or change your filters.
               </p>
 
               <button
@@ -328,7 +476,10 @@ function App() {
                   <button
                     className="show-card"
                     key={show.id}
-                    onClick={() => setSelectedShow(show)}
+                    onClick={() => {
+                      setSelectedLanguage(null);
+                      setSelectedShow(show);
+                    }}
                   >
                     <div className="poster-wrapper">
                       <img
@@ -1764,5 +1915,94 @@ const styles = `
       top: 15px;
     }
   }
+
+  /* FILTER BAR */
+
+  .filter-bar {
+    position: sticky;
+    top: 72px;
+    z-index: 40;
+    padding: 14px 0;
+    background: rgba(11, 13, 18, 0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .filter-inner {
+    width: min(1400px, calc(100% - 48px));
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .filter-label {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .filter-select {
+    min-width: 150px;
+    padding: 9px 34px 9px 12px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 10px;
+    background: #171a21;
+    color: #f8fafc;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .filter-select:focus {
+    border-color: rgba(255,138,91,0.7);
+  }
+
+  .clear-filters {
+    padding: 9px 14px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+    color: #f8fafc;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .clear-filters:hover {
+    background: rgba(255,255,255,0.12);
+  }
+
+  @media (max-width: 760px) {
+    .filter-bar {
+      top: 64px;
+    }
+
+    .filter-inner {
+      width: min(100% - 24px, 1400px);
+      align-items: stretch;
+    }
+
+    .filter-group {
+      flex: 1 1 140px;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .filter-select {
+      width: 100%;
+    }
+
+    .clear-filters {
+      flex: 1 1 100%;
+    }
+  }
+
 `;
 export default App;
