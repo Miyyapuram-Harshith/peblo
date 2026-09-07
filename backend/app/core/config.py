@@ -47,9 +47,9 @@ class Settings(BaseSettings):
     seed_data_path: str = "./data"
 
     # Demo Credentials
-    demo_admin_email: str = "admin@peblo.local"
+    demo_admin_email: str = "admin@peblo.test"
     demo_admin_password: str = "admin123"
-    demo_editor_email: str = "editor@peblo.local"
+    demo_editor_email: str = "editor@peblo.test"
     demo_editor_password: str = "editor123"
 
     @property
